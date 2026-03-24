@@ -1,0 +1,47 @@
+package model.fighter;
+
+public abstract class Fighter {
+    private String name;
+    private int health;
+    private int maxHealth;
+    private int attack;
+    private int defense;
+    private int level;
+
+    public Fighter(String name,int maxHealth, int attack, int defense) {
+        health = maxHealth;
+        level = 1;
+    }
+
+    public void takeDamage(int damage) {
+        health -= (damage - defense);
+        if(health <= 0) {
+            System.out.println(name+" повержен!");
+        }
+    }
+
+    public boolean isAlive() {
+        return health < 0;
+    }
+
+    public void heal(int amount) {
+        health += amount;
+        if (health > maxHealth) health = maxHealth;
+    }
+
+    public String getFighterName() {
+        return name;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void printInfo() {
+        System.out.println("- имя: "+name+"\n- класс: "+getClassName()+"\n- уровень: "+level+"\n- здоровье: "+health+"\n- атака: "+attack+"\n- защита: "+defense);
+    }
+
+    abstract String getClassName();
+    abstract int specialAttack();
+
+}
