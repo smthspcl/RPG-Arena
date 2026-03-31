@@ -11,6 +11,9 @@ public abstract class Fighter {
     public Fighter(String name,int maxHealth, int attack, int defense) {
         health = maxHealth;
         level = 1;
+        this.name = name;
+        this.attack = attack;
+        this.defense = defense;
     }
 
     public void takeDamage(int damage) {
@@ -37,8 +40,21 @@ public abstract class Fighter {
         return attack;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
     public void printInfo() {
         System.out.println("- имя: "+name+"\n- класс: "+getClassName()+"\n- уровень: "+level+"\n- здоровье: "+health+"\n- атака: "+attack+"\n- защита: "+defense);
+        System.out.println("---------------------");
     }
 
     abstract String getClassName();

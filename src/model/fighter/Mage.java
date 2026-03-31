@@ -1,6 +1,8 @@
 package model.fighter;
 
-public class Mage extends Fighter {
+import model.interfaces.Healable;
+
+public class Mage extends Fighter implements Healable {
 
     private int mana;
 
@@ -10,12 +12,12 @@ public class Mage extends Fighter {
     }
 
     @Override
-    String getClassName() {
+    public String getClassName() {
         return "Маг";
     }
 
     @Override
-    int specialAttack() {
+    public int specialAttack() {
         if(mana>=30) {
             mana-=30;
             System.out.println(getFighterName()+" кастует огненный шар!");
@@ -29,5 +31,27 @@ public class Mage extends Fighter {
     public void regenerateMana(int amount) {
         mana+=amount;
         if(mana>100){ mana = 100;}
+    }
+
+    @Override
+    public void printInfo() {
+        System.out.println("- имя: "+getFighterName()+"\n- класс: "+getClassName()+"\n- уровень: "+getLevel()+"\n- здоровье: "+getHealth()+"\n- атака: "+getAttack()+"\n- защита: "+getDefense()+"\n- мана: "+mana);
+        System.out.println("---------------------");
+    }
+
+    @Override
+    public void healSelf() {
+        if(canHeal()) {
+            mana -= 20;
+            heal(30);
+            System.out.println(getFighterName()+" использует магию лечения!");
+        } else {
+            System.out.println("Недостаточно маны для лечения...");
+        }
+    }
+
+    @Override
+    public boolean canHeal() {
+        return mana>=20;
     }
 }

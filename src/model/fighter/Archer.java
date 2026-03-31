@@ -1,6 +1,11 @@
 package model.fighter;
 
-public class Archer extends Fighter {
+import model.interfaces.Healable;
+import model.interfaces.Stunnable;
+
+public class Archer extends Fighter implements Healable, Stunnable {
+
+    private boolean stunned;
 
     private int arrows;
     public Archer(String name, int maxHealth, int attack, int defense, int arrows) {
@@ -9,12 +14,12 @@ public class Archer extends Fighter {
     }
 
     @Override
-    String getClassName() {
+    public String getClassName() {
         return "Лучник";
     }
 
     @Override
-    int specialAttack() {
+    public int specialAttack() {
         if(arrows>0){
             arrows--;
             System.out.println(getFighterName()+" выпускает точный выстрел! Стрел осталось: "+arrows);
@@ -32,4 +37,43 @@ public class Archer extends Fighter {
             arrows = 20;
         }
     }
+
+    @Override
+    public void printInfo() {
+        System.out.println("- имя: "+getFighterName()+"\n- класс: "+getClassName()+"\n- уровень: "+getLevel()+"\n- здоровье: "+getHealth()+"\n- атака: "+getAttack()+"\n- защита: "+getDefense()+"\n- стрелы: "+arrows);
+        System.out.println("---------------------");
+    }
+
+    @Override
+    public void healSelf() {
+        if(canHeal()){
+            arrows-= 1;
+            heal(20);
+            System.out.println(getFighterName()+" использовал стрелу лечения!");
+        } else {
+            System.out.println("Стрелы закончились, невозможно использовать стрелу лечения...");
+        }
+    }
+
+    @Override
+    public boolean canHeal() {
+        return arrows>=1;
+    }
+
+    @Override
+    public void stun() {
+        stunned = true;
+        System.out.println(getFighterName()+" оглушён!");
+    }
+
+    @Override
+    public boolean isStunned() {
+        return stunned;
+    }
+
+    @Override
+    public void recoverFromStun() {
+        stunned = false;
+    }
+
 }
