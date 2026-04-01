@@ -14,6 +14,7 @@ public abstract class Fighter {
         this.name = name;
         this.attack = attack;
         this.defense = defense;
+
     }
 
     public void takeDamage(int damage) {
@@ -24,7 +25,7 @@ public abstract class Fighter {
     }
 
     public boolean isAlive() {
-        return health < 0;
+        return health > 0;
     }
 
     public void heal(int amount) {
@@ -52,12 +53,14 @@ public abstract class Fighter {
         return defense;
     }
 
+    public int getInitiative() { return (int) (Math.random()*20) + 1; }
+
     public void printInfo() {
         System.out.println("- имя: "+name+"\n- класс: "+getClassName()+"\n- уровень: "+level+"\n- здоровье: "+health+"\n- атака: "+attack+"\n- защита: "+defense);
         System.out.println("---------------------");
     }
 
-    abstract String getClassName();
-    abstract int specialAttack();
+    public abstract String getClassName();
+    public abstract int specialAttack();
 
 }
