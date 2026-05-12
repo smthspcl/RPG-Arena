@@ -9,6 +9,10 @@ public class BattleEngine {
         int aIni = a.getInitiative();
         int bIni = b.getInitiative();
         if(aIni>bIni) {
+            if(aIni == 20) {
+                b.takeDamage(a.specialAttack());
+                return;
+            }
             System.out.println(a.getFighterName()+" атакует!");
             b.takeDamage(a.getAttack());
         } else if (aIni==bIni) {
@@ -17,6 +21,10 @@ public class BattleEngine {
             a.takeDamage(b.getAttack());
         }
         else {
+            if(bIni == 20) {
+                a.takeDamage(b.specialAttack());
+                return;
+            }
             System.out.println(b.getFighterName()+" атакует!");
             a.takeDamage(b.getAttack());
         }
@@ -32,6 +40,8 @@ public class BattleEngine {
         while(a.isAlive() && b.isAlive()) {
             System.out.println("Раунд: "+count);
             fight(a,b);
+            System.out.println("Здоровье "+a.getFighterName()+": "+a.getHealth());
+            System.out.println("Здоровье "+b.getFighterName()+": "+b.getHealth());
             count++;
         }
 

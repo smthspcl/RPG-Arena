@@ -9,6 +9,7 @@ public abstract class Fighter {
     private int level;
 
     public Fighter(String name,int maxHealth, int attack, int defense) {
+        this.maxHealth= maxHealth;
         health = maxHealth;
         level = 1;
         this.name = name;
@@ -48,6 +49,11 @@ public abstract class Fighter {
     public int getHealth() {
         return health;
     }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
 
     public int getDefense() {
         return defense;
